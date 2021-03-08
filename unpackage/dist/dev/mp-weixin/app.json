@@ -1,0 +1,51 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/index/index",
+    "pages/evaluation/evaluation",
+    "pages/achievement/achievement",
+    "pages/me/me"
+  ],
+  "subPackages": [],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "backgroundColor": "#91b4ff",
+    "navigationBarBackgroundColor": "#91b4ff",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": false,
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "color": "#bfbfbf",
+    "selectedColor": "#91b4ff",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "最新数据",
+        "iconPath": "static/icon/index_.jpg",
+        "selectedIconPath": "static/icon/index.jpg"
+      },
+      {
+        "pagePath": "pages/evaluation/evaluation",
+        "text": "学评教",
+        "iconPath": "static/icon/feeling_.jpg",
+        "selectedIconPath": "static/icon/feeling.jpg"
+      },
+      {
+        "pagePath": "pages/achievement/achievement",
+        "text": "业绩考核",
+        "iconPath": "static/icon/consult_.jpg",
+        "selectedIconPath": "static/icon/consult.jpg"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "text": "我的",
+        "iconPath": "static/icon/me_.jpg",
+        "selectedIconPath": "static/icon/me.jpg"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

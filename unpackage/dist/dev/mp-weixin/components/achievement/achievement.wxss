@@ -1,0 +1,97 @@
+.background {
+  z-index: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  height: 100vh;
+  position: fixed;
+  width: 100vw;
+}
+.background .preface {
+  width: 100%;
+}
+.card {
+  padding: 20rpx;
+  background-color: #ffffff;
+  box-shadow: 6rpx 6rpx 15rpx 3rpx rgba(0, 0, 0, 0.21);
+  border-radius: 15rpx;
+  z-index: 1;
+  position: relative;
+}
+.achievement {
+  margin: 10px;
+  height: auto;
+  position: relative;
+  padding: 10px;
+}
+.achievement .label {
+  font-size: 40rpx;
+  font-weight: bolder;
+}
+.achievement .label .participate {
+  margin-left: 30rpx;
+  font-size: 20rpx;
+  text-align: right;
+  font-weight: bold;
+  color: #298FFE;
+}
+.achievement .label .text {
+  font-size: 20rpx;
+  text-align: right;
+  color: #afafaf;
+}
+.achievement .content {
+  margin-top: 20rpx;
+}
+.achievement .content .items_wrapper {
+  -webkit-box-flex: 5;
+  -webkit-flex: 5;
+          flex: 5;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  text-align: center;
+}
+.achievement .content .items_wrapper .items {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  border-left: 1.1px solid #efefef;
+  border-right: 1.1px solid #efefef;
+}
+.achievement .content .items_wrapper .items .item_iconfont {
+  font-size: 120rpx;
+}
+.achievement .content .items_wrapper .items .name {
+  margin-top: 0rpx;
+  font-size: 28rpx;
+  margin-bottom: 20rpx;
+}
+.achievement .content .items_wrapper .items .value {
+  font-size: 70rpx;
+  color: #298FFE;
+  font-weight: bolder;
+  font-family: 'STXinwei', Courier, monospace;
+}
+.achievement .content .info {
+  font-size: 25rpx;
+  margin-top: 10rpx;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+}
+.achievement .content .info .value {
+  margin-left: 10rpx;
+  color: #298FFE;
+}
+

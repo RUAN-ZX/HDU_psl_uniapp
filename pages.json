@@ -1,0 +1,87 @@
+{
+	"easycom": {
+		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+	},
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+		    "path" : "pages/login/login",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		},
+		{
+			"path": "pages/index/index"
+		},{
+            "path" : "pages/evaluation/evaluation",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/achievement/achievement",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/me/me",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
+	"globalStyle": {
+		"backgroundTextStyle": "dark",
+		"backgroundColor": "#91b4ff",
+		"navigationBarBackgroundColor": "#91b4ff",
+		"navigationBarTextStyle": "white",
+		"enablePullDownRefresh": false,
+		"navigationStyle": "custom",
+		"app-plus": {
+			"scrollIndicator": "none",
+			"titleNView": false
+		}
+	},
+	"tabBar": {
+		"color": "#bfbfbf",
+		"selectedColor": "#91b4ff",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+			"pagePath": "pages/index/index",
+			"text": "最新数据",
+			"iconPath": "static/icon/index_.jpg",
+			"selectedIconPath": "static/icon/index.jpg"
+		},
+		{
+			"pagePath": "pages/evaluation/evaluation",
+			"text": "学评教",
+			"iconPath": "static/icon/feeling_.jpg",
+			"selectedIconPath": "static/icon/feeling.jpg"
+		},
+		{
+			"pagePath": "pages/achievement/achievement",
+			"text": "业绩考核",
+			"iconPath": "static/icon/consult_.jpg",
+			"selectedIconPath": "static/icon/consult.jpg"
+		},
+		{
+			"pagePath": "pages/me/me",
+			"text": "我的",
+			"iconPath": "static/icon/me_.jpg",
+			"selectedIconPath": "static/icon/me.jpg"
+		}
+		]
+	}
+}

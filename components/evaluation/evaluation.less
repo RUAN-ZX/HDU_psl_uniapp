@@ -1,0 +1,106 @@
+.card{
+	padding: 20rpx;
+	background-color: @cardColor;
+	box-shadow: 6rpx 6rpx 15rpx 3rpx rgba(0,0,0,0.21);
+	border-radius: 15rpx;
+	z-index: 1;
+	position: relative;
+}
+
+.top_card{
+	display: flex;
+	flex-direction: column;
+	
+	margin: 10px;
+	height: auto;
+	position:relative;
+	padding: 10px; //实践结果 胶囊的边距确实是10px
+	
+	.label{
+		font-size: 40rpx;
+		font-weight: bolder;
+		.e_participate{
+			margin-left: @padding;
+			
+			font-size: 20rpx;
+			text-align: right;
+			color: @labelColor;
+			.evalue{
+				margin-left: @padding/3;
+				color: @themeColor;
+			}
+		}
+	}
+
+	.div_1{
+		margin-top: 20rpx;
+		display: flex;
+		flex-direction: row;
+
+		z-index: 2;
+		padding-bottom: 10rpx;
+		border-bottom: 1px solid @lineColor;
+		text-align:center;
+		font-size: 30rpx;
+		.score{
+			flex: 1;
+			.scoreNum{
+				font-weight: bolder;
+				color: @themeColor;
+				display: block;
+				font-size: 60rpx;
+			}
+		}
+		.srank{
+			flex: 1;
+			.value{
+				font-weight: bolder;
+				color: @themeColor;
+				display: block;
+				font-size: 60rpx;
+			}
+		}
+		.prank{
+			flex: 1;
+			.value{
+				font-weight: bolder;
+				color: @themeColor;
+				display: block;
+				font-size: 60rpx;
+			}
+		}
+	}
+	.div_2{
+		padding-top: 20rpx;
+		display: flex;
+		flex-direction: column;
+		z-index: 1;
+		.cname{
+			font-weight: bolder;
+		}
+		.ccid{
+			font-size: 20rpx;
+			color: @labelColor;
+		}
+		.evaluation_wrapper{
+			margin-top: 20rpx;
+			display: grid;
+			grid-template-columns: repeat(2,375rpx);
+			grid-template-rows: repeat(3,30rpx);
+			grid-row-gap: 10rpx;
+			z-index: 2;
+			padding-bottom: 10rpx;
+			border-bottom: 1px solid @lineColor;
+			.evaluation{
+				font-size: 25rpx;
+				.value{
+					margin-left: @padding/3;
+					text-align:left;
+					font-weight: bolder;
+					color: @themeColor;
+				}
+			}
+		}
+		
+	}
+}

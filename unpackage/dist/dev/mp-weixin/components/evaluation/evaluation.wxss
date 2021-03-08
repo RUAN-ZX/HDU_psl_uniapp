@@ -1,0 +1,139 @@
+.background {
+  z-index: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  height: 100vh;
+  position: fixed;
+  width: 100vw;
+}
+.background .preface {
+  width: 100%;
+}
+.card {
+  padding: 20rpx;
+  background-color: #ffffff;
+  box-shadow: 6rpx 6rpx 15rpx 3rpx rgba(0, 0, 0, 0.21);
+  border-radius: 15rpx;
+  z-index: 1;
+  position: relative;
+}
+.top_card {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  margin: 10px;
+  height: auto;
+  position: relative;
+  padding: 10px;
+}
+.top_card .label {
+  font-size: 40rpx;
+  font-weight: bolder;
+}
+.top_card .label .e_participate {
+  margin-left: 30rpx;
+  font-size: 20rpx;
+  text-align: right;
+  color: #afafaf;
+}
+.top_card .label .e_participate .evalue {
+  margin-left: 10rpx;
+  color: #298FFE;
+}
+.top_card .div_1 {
+  margin-top: 20rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  z-index: 2;
+  padding-bottom: 10rpx;
+  border-bottom: 1px solid #efefef;
+  text-align: center;
+  font-size: 30rpx;
+}
+.top_card .div_1 .score {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+}
+.top_card .div_1 .score .scoreNum {
+  font-weight: bolder;
+  color: #298FFE;
+  display: block;
+  font-size: 60rpx;
+}
+.top_card .div_1 .srank {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+}
+.top_card .div_1 .srank .value {
+  font-weight: bolder;
+  color: #298FFE;
+  display: block;
+  font-size: 60rpx;
+}
+.top_card .div_1 .prank {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+}
+.top_card .div_1 .prank .value {
+  font-weight: bolder;
+  color: #298FFE;
+  display: block;
+  font-size: 60rpx;
+}
+.top_card .div_2 {
+  padding-top: 20rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  z-index: 1;
+}
+.top_card .div_2 .cname {
+  font-weight: bolder;
+}
+.top_card .div_2 .ccid {
+  font-size: 20rpx;
+  color: #afafaf;
+}
+.top_card .div_2 .evaluation_wrapper {
+  margin-top: 20rpx;
+  display: grid;
+  grid-template-columns: repeat(2, 375rpx);
+  grid-template-rows: repeat(3, 30rpx);
+  grid-row-gap: 10rpx;
+  z-index: 2;
+  padding-bottom: 10rpx;
+  border-bottom: 1px solid #efefef;
+}
+.top_card .div_2 .evaluation_wrapper .evaluation {
+  font-size: 25rpx;
+}
+.top_card .div_2 .evaluation_wrapper .evaluation .value {
+  margin-left: 10rpx;
+  text-align: left;
+  font-weight: bolder;
+  color: #298FFE;
+}
+
