@@ -1,31 +1,32 @@
 <template>
 	<view class="card top_card">
 		<view class="label">
-			{{e.elabel}} 学评教
+			{{e.Etime}} 学评教
 			<span class="e_participate">
-				{{e.participate.name}} 
+				{{title.e[3]}} 
 				<span class="evalue">
-					{{e.participate.value}}
+					{{e.Eparticipate}}
 				</span>
 				
 			</span>
 		</view>
+		
 		<view class="div_1 ">
 			<view class="score">
-				{{e.score.name}}
+				{{title.e[0]}}
 				
 				<span class="scoreNum">
-					{{e.score.value}}
+					{{e.Escore}}
 				</span>
 			</view>
 			<view class="srank">
-				{{e.srank.name}}
-				<span class="value">{{e.srank.value}}</span>
+				{{title.e[1]}}
+				<span class="value">{{e.Esrank}}</span>
 			</view>
 
 			<view class="prank">
-				{{e.prank.name}}
-				<span class="value">{{e.prank.value}}</span>
+				{{title.e[2]}}
+				<span class="value">{{e.Eprank}}</span>
 
 			</view>
 		</view>
@@ -36,19 +37,51 @@
 			class="div_2">
 			
 			<u-collapse event-type="close" :head-style="head_style">
-				<u-collapse-item :title="item.name">
+				<u-collapse-item :title="item.Cname">
 					 
 					<view class="ccid">
-						{{item.cid}}
+						{{item.CCid}}
 					</view>
 					<view class="evaluation_wrapper">
-						<view 
-							v-for="items in item.item"
-							v-key="index"
-							class="evaluation">
-								{{items.name}}
+						<view class="evaluation">
+								{{title.c[0]}}
 							<span class="value">
-								{{items.value}}
+								{{item.Cscore}}
+							</span>
+						</view>
+						
+						<view class="evaluation">
+								{{title.c[1]}}
+							<span class="value">
+								{{item.Cparticipate}}
+							</span>
+						</view>
+						
+						<view class="evaluation">
+								{{title.c[2]}}
+							<span class="value">
+								{{item.Cscore_1}}
+							</span>
+						</view>
+						
+						<view class="evaluation">
+								{{title.c[3]}}
+							<span class="value">
+								{{item.Cscore_2}}
+							</span>
+						</view>
+						
+						<view class="evaluation">
+								{{title.c[4]}}
+							<span class="value">
+								{{item.Cscore_3}}
+							</span>
+						</view>
+						
+						<view class="evaluation">
+								{{title.c[5]}}
+							<span class="value">
+								{{item.Cscore_4}}
 							</span>
 						</view>
 					</view>
@@ -62,6 +95,29 @@
 	export default {
 		name: 'evaluation',
 		props: {
+			title: {
+				type: Object,
+				default: function(){
+					return {
+						e:["总共得分","全校排名","本院排名","参评人次"],
+						c:["总共得分","参评人数","教学能力","教学态度","师生交流","教学效果"],
+						a:[
+							{
+								icon:"icon-grade",
+								name:"考核等级"
+							},
+							{
+								icon:"icon-time",
+								name:"教学学时"
+							},
+							{
+								icon:"icon-score",
+								name:"考核分数"
+							}
+						]
+					};
+				}
+			},
 			c:{
 				type: Array,
 				default: function(){

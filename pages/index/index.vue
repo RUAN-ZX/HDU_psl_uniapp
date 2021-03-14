@@ -24,7 +24,7 @@
 
 		    
 		    <achievement :a="a"></achievement>
-			<evaluation :e="e" :c="c"></evaluation>
+			<evaluation :title="app.title" :e="e" :c="c"></evaluation>
 			
 		</view>
 	</view>
@@ -142,40 +142,8 @@
 			  },
 			  success: function(res) {
 				if(res.data.code==0){
-				  var a = [];
-				  for (var _item of res.data.info){
-				  a.push({
-					name: _item.Cname,
-					cid: _item.CCid,
-					item:[
-					  {
-						name:_this.app.title.c[0],
-						value: _item.Cscore
-					  },
-					  {
-						name:_this.app.title.c[1],
-						value: _item.Cparticipate
-					  },
-					  {
-						name:_this.app.title.c[2],
-						value:_item.Cscore_1
-					  },
-					  {
-						name:_this.app.title.c[3],
-						value:_item.Cscore_2
-					  },
-					  {
-						name:_this.app.title.c[4],
-						value:_item.Cscore_3
-					  },
-					  {
-						name:_this.app.title.c[5],
-						value:_item.Cscore_4
-					  }
-					]
-				  })
-				  }
-				  _this.c = a;
+				  
+				  _this.c = res.data.info;
 				}
 			  },
 			  fail:function (res) {
@@ -198,25 +166,7 @@
 			  },
 			  success: function(res) {
 				if(res.data.code==0){
-					_this.e={
-						elabel:res.data.info.Etime,
-						srank:{
-							value:res.data.info.Esrank,
-							name:_this.app.title.e[0]
-						},
-						prank:{
-							value:res.data.info.Eprank,
-							name:_this.app.title.e[1]
-						},
-						score:{
-							value:res.data.info.Escore,
-							name:_this.app.title.e[2]
-						},
-						participate:{
-							value: res.data.info.Eparticipate,
-							name:_this.app.title.e[3]
-						}
-					}
+					_this.e=res.data.info;
 				}
 			  },
 			  fail:function (res) {

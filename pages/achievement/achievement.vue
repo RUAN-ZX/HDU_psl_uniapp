@@ -22,7 +22,7 @@
 					v-key="index"
 					v-for="(item,index) in option"
 					v-model="event[index].m" 
-					:title="item[event[index].m-3*index].label" 
+					:title="item[event[index].m-4*index].label" 
 					:options="item" 
 					@change="change">
 				</u-dropdown-item>
@@ -58,7 +58,7 @@
 				ani: "animated fadeInUp",
 				animation: {},
 				animationData: {},
-				event: [{m:0},{m:3}], //0 1 2 || 3 4
+				event: [{m:0},{m:4}], //0 1 2 || 3 4
 				app:{},
 				cap_info:{},
 				option: [],
@@ -88,7 +88,8 @@
 			},
 			sort_(e){
 				// sorting the archievements
-				let sort = e[1].m-3;
+				// 此处代码不够简练 还需要修改achievement组件
+				let sort = e[1].m-4;
 				let event = e[0].m;
 				if(event==0){
 					_this.array_a.sort(function(a,b){
@@ -98,13 +99,21 @@
 						else return result;
 					})
 				}
+				else if(event==3){
+					_this.array_a.sort(function(a,b){
+						let result = b.alabel.localeCompare(a.alabel);
+						
+						if(sort==1&&result==1) return -1;
+						else if(sort==1&&result<1) return 1;
+						else return result;
+					});
+				}
 				else{
 					_this.array_a.sort(function(a,b){
 						let result = a.aitem[event].value-b.aitem[event].value;
 						return sort ?result:(-result);
 					})
 				}
-				
 			},
 			fadeInUp(){
 				_this.ani = "animated fadeInUp";
@@ -138,16 +147,20 @@
 						{
 							label:array_option[2].name,
 							value:2
-						}
+						},
+						{
+							label:"考核学期",
+							value:3
+						},
 					],
 					[
 						{
 							label:"由高到低",
-							value:3
+							value:4
 						},
 						{
 							label:"由低到高",
-							value:4
+							value:5
 						}
 					]
 				]

@@ -96,13 +96,13 @@ var components
 try {
   components = {
     uSwiper: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-swiper/u-swiper */ "uview-ui/components/u-swiper/u-swiper").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-swiper/u-swiper.vue */ 111))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-swiper/u-swiper */ "uview-ui/components/u-swiper/u-swiper").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-swiper/u-swiper.vue */ 113))
     },
     achievement: function() {
-      return __webpack_require__.e(/*! import() | components/achievement/achievement */ "components/achievement/achievement").then(__webpack_require__.bind(null, /*! @/components/achievement/achievement.vue */ 118))
+      return __webpack_require__.e(/*! import() | components/achievement/achievement */ "components/achievement/achievement").then(__webpack_require__.bind(null, /*! @/components/achievement/achievement.vue */ 120))
     },
     evaluation: function() {
-      return __webpack_require__.e(/*! import() | components/evaluation/evaluation */ "components/evaluation/evaluation").then(__webpack_require__.bind(null, /*! @/components/evaluation/evaluation.vue */ 125))
+      return __webpack_require__.e(/*! import() | components/evaluation/evaluation */ "components/evaluation/evaluation").then(__webpack_require__.bind(null, /*! @/components/evaluation/evaluation.vue */ 127))
     }
   }
 } catch (e) {
@@ -159,7 +159,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _createForOfIteratorHelper(o, allowArrayLike) {var it;if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) {if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {if (it) o = it;var i = 0;var F = function F() {};return { s: F, n: function n() {if (i >= o.length) return { done: true };return { done: false, value: o[i++] };}, e: function e(_e) {throw _e;}, f: F };}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}var normalCompletion = true,didErr = false,err;return { s: function s() {it = o[Symbol.iterator]();}, n: function n() {var step = it.next();normalCompletion = step.done;return step;}, e: function e(_e2) {didErr = true;err = _e2;}, f: function f() {try {if (!normalCompletion && it.return != null) it.return();} finally {if (didErr) throw err;}} };}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}var achievement = function achievement() {__webpack_require__.e(/*! require.ensure | components/achievement/achievement */ "components/achievement/achievement").then((function () {return resolve(__webpack_require__(/*! @/components/achievement/achievement.vue */ 118));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var evaluation = function evaluation() {__webpack_require__.e(/*! require.ensure | components/evaluation/evaluation */ "components/evaluation/evaluation").then((function () {return resolve(__webpack_require__(/*! @/components/evaluation/evaluation.vue */ 125));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var headerRyan = function headerRyan() {__webpack_require__.e(/*! require.ensure | components/header/header */ "components/header/header").then((function () {return resolve(__webpack_require__(/*! @/components/header/header.vue */ 132));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var achievement = function achievement() {__webpack_require__.e(/*! require.ensure | components/achievement/achievement */ "components/achievement/achievement").then((function () {return resolve(__webpack_require__(/*! @/components/achievement/achievement.vue */ 120));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var evaluation = function evaluation() {__webpack_require__.e(/*! require.ensure | components/evaluation/evaluation */ "components/evaluation/evaluation").then((function () {return resolve(__webpack_require__(/*! @/components/evaluation/evaluation.vue */ 127));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var headerRyan = function headerRyan() {__webpack_require__.e(/*! require.ensure | components/header/header */ "components/header/header").then((function () {return resolve(__webpack_require__(/*! @/components/header/header.vue */ 134));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -303,40 +303,8 @@ __webpack_require__.r(__webpack_exports__);
 
       success: function success(res) {
         if (res.data.code == 0) {
-          var a = [];var _iterator = _createForOfIteratorHelper(
-          res.data.info),_step;try {for (_iterator.s(); !(_step = _iterator.n()).done;) {var _item = _step.value;
-              a.push({
-                name: _item.Cname,
-                cid: _item.CCid,
-                item: [
-                {
-                  name: _this.app.title.c[0],
-                  value: _item.Cscore },
 
-                {
-                  name: _this.app.title.c[1],
-                  value: _item.Cparticipate },
-
-                {
-                  name: _this.app.title.c[2],
-                  value: _item.Cscore_1 },
-
-                {
-                  name: _this.app.title.c[3],
-                  value: _item.Cscore_2 },
-
-                {
-                  name: _this.app.title.c[4],
-                  value: _item.Cscore_3 },
-
-                {
-                  name: _this.app.title.c[5],
-                  value: _item.Cscore_4 }] });
-
-
-
-            }} catch (err) {_iterator.e(err);} finally {_iterator.f();}
-          _this.c = a;
+          _this.c = res.data.info;
         }
       },
       fail: function fail(res) {
@@ -359,25 +327,7 @@ __webpack_require__.r(__webpack_exports__);
 
       success: function success(res) {
         if (res.data.code == 0) {
-          _this.e = {
-            elabel: res.data.info.Etime,
-            srank: {
-              value: res.data.info.Esrank,
-              name: _this.app.title.e[0] },
-
-            prank: {
-              value: res.data.info.Eprank,
-              name: _this.app.title.e[1] },
-
-            score: {
-              value: res.data.info.Escore,
-              name: _this.app.title.e[2] },
-
-            participate: {
-              value: res.data.info.Eparticipate,
-              name: _this.app.title.e[3] } };
-
-
+          _this.e = res.data.info;
         }
       },
       fail: function fail(res) {

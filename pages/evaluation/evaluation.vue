@@ -10,7 +10,7 @@
 		</view>
 		
 		<view class="content" :style="{display:m_hidden}">
-			<header-ryan title="历年教学业绩考核"
+			<header-ryan title="历年学评教及其明细"
 				:top="cap_info.top"
 				:left="cap_info.height">
 				
@@ -22,7 +22,7 @@
 					v-key="index"
 					v-for="(item,index) in option"
 					v-model="event[index].m" 
-					:title="item[event[index].m-3*index].label" 
+					:title="item[event[index].m-5*index].label" 
 					:options="item" 
 					@change="change">
 				</u-dropdown-item>
@@ -33,8 +33,8 @@
 			<view 
 				:class="ani" 
 				v-if="ani_if"
-				v-for="(item,index) in array_a">
-				<evaluation :e="item" :c=""></evaluation>
+				v-for="(item,index) in arrayCE">
+				<evaluation :e="item" :c="item.Ec"></evaluation>
 			</view>
 			
 			
@@ -58,11 +58,11 @@
 				ani: "animated fadeInUp",
 				animation: {},
 				animationData: {},
-				event: [{m:0},{m:3}], //0 1 2 || 3 4
+				event: [{m:0},{m:5}], //0 1 2 || 3 4
 				app:{},
 				cap_info:{},
 				option: [],
-				array_a:[],
+				arrayCE:[],
 				m_hidden:"none",
 				m_bg_hidden:""
 			}
@@ -88,22 +88,38 @@
 			},
 			sort_(e){
 				// sorting the archievements
-				let sort = e[1].m-3;
+				let sort = e[1].m-5;
 				let event = e[0].m;
-				if(event==0){
-					_this.array_a.sort(function(a,b){
-						let result = a.aitem[event].value.localeCompare(b.aitem[event].value)
-						if(sort==1&&result==1) return -1;
-						else if(sort==1&&result<1) return 1;
-						else return result;
-					})
-				}
-				else{
-					_this.array_a.sort(function(a,b){
-						let result = a.aitem[event].value-b.aitem[event].value;
-						return sort ?result:(-result);
-					})
-				}
+				_this.arrayCE.sort(function(a,b){
+					let result =0;
+					switch(event){
+						case 0:{
+							result=a.Escore-b.Escore;
+							break;
+						}
+						case 1:{
+							result=a.Esrank-b.Esrank;
+							break;
+						}
+						case 2:{
+							result=a.Eprank-b.Eprank;
+							break;
+						}
+						case 3:{
+							result=a.Eparticipate-b.Eparticipate;
+							break;
+						}
+						case 4:{
+							result = b.Etime.localeCompare(a.Etime);
+							if(sort==1&&result==1) return -1;
+							else if(sort==1&&result<1) return 1;
+							else return result;
+							break;
+						}
+					}
+					
+					return sort ?result:(-result);
+				})
 				
 			},
 			fadeInUp(){
@@ -116,11 +132,6 @@
 				_this.$nextTick(() => {
 					_this.ani_if = true;
 				});
-				// _this.ani_if = true;
-				
-				// _this.$nextTick(() => {
-					
-				// });
 				
 			},
 			option_init: function(){
@@ -138,16 +149,25 @@
 						{
 							label:array_option[2],
 							value:2
-						}
+						},
+						{
+							label:array_option[3],
+							value:3
+						},
+						{
+							label:"考核学期",
+							value:4
+						},
 					],
 					[
 						{
 							label:"由高到低",
-							value:3
+							value:5
 						},
 						{
 							label:"由低到高",
-							value:4
+							value:6
+						
 						}
 					]
 				]
@@ -165,46 +185,21 @@
 			
 			uni.request({
 			  method:'post',
-			  url: _this.app.url+"/EGetAll", //仅为示例，并非真实的接口地址
+			  url: _this.app.url+"/CEGetAll", //仅为示例，并非真实的接口地址
 			  data: {
-				"ATid": _this.app.Tid,
+				"Tid": _this.app.Tid,
 				"access": access
 			  },
 			  header: {
 				  'content-type': 'application/x-www-form-urlencoded'
 			  },
 			  success: function(res) {
-				if(res.data.code==0){    
-				    var temp_array = res.data.info;
-					for (let temp of temp_array) {
-						// console.log(temp_array[temp]);
-						_this.array_a.push({
-							alabel: temp.Atime+"-"+(temp.Atime+1),
-							accident: temp=="否"?"有":"未", //已出现教学事故
-							info: temp.Ainfo,
-							aitem:[
-							{
-								icon: _this.app.title.a[0].icon,
-								name: _this.app.title.a[0].name,
-								value: temp.Agrade
-							},
-							{
-								icon: _this.app.title.a[1].icon,
-								name: _this.app.title.a[1].name,
-								value: temp.Ahour
-							},
-							{
-								icon: _this.app.title.a[2].icon,
-								name: _this.app.title.a[2].name,
-								value: temp.Ascore
-							}
-							]
-						});
-					}
+				if(res.data.code==0){  
+				    _this.arrayCE = res.data.info;
 				}
 			  },
 			  fail:function (res) {
-				console.log("fail AgetAll years"+res);
+				console.log("fail CEgetAll years"+res);
 			  },
 			  complete: () => {
 				 _this.loadingComplete(); 
