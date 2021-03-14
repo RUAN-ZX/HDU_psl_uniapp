@@ -29,28 +29,31 @@
 
 			</view>
 		</view>
-
+		
 		<view 
 			v-for="item in c"
 			v-key="id"
 			class="div_2">
-			<view class="cname">
-				{{item.name}}
-			</view>
-			<view class="ccid">
-				{{item.cid}}
-			</view>
-			<view class="evaluation_wrapper">
-				<view 
-					v-for="items in item.item"
-					v-key="index"
-					class="evaluation">
-						{{items.name}}
-					<span class="value">
-						{{items.value}}
-					</span>
-				</view>
-			</view>
+			
+			<u-collapse event-type="close" :head-style="head_style">
+				<u-collapse-item :title="item.name">
+					 
+					<view class="ccid">
+						{{item.cid}}
+					</view>
+					<view class="evaluation_wrapper">
+						<view 
+							v-for="items in item.item"
+							v-key="index"
+							class="evaluation">
+								{{items.name}}
+							<span class="value">
+								{{items.value}}
+							</span>
+						</view>
+					</view>
+				</u-collapse-item>
+			</u-collapse>
 		</view>
 	</view>
 </template>
@@ -94,6 +97,11 @@
 		
 		data() {
 			return {
+				head_style:{
+					fontWeight: 'bolder',
+					height:"20px",
+					lineHeight:"20px"
+				}
 			};
 		},
 		created() {

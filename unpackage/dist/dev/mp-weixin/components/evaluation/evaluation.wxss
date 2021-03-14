@@ -110,9 +110,6 @@
           flex-direction: column;
   z-index: 1;
 }
-.top_card .div_2 .cname {
-  font-weight: bolder;
-}
 .top_card .div_2 .ccid {
   font-size: 20rpx;
   color: #afafaf;
@@ -129,6 +126,7 @@
 }
 .top_card .div_2 .evaluation_wrapper .evaluation {
   font-size: 25rpx;
+  color: #646464;
 }
 .top_card .div_2 .evaluation_wrapper .evaluation .value {
   margin-left: 10rpx;

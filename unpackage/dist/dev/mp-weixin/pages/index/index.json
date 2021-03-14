@@ -2,6 +2,7 @@
   "usingComponents": {
     "u-swiper": "/uview-ui/components/u-swiper/u-swiper",
     "achievement": "/components/achievement/achievement",
-    "evaluation": "/components/evaluation/evaluation"
+    "evaluation": "/components/evaluation/evaluation",
+    "header-ryan": "/components/header/header"
   }
 }

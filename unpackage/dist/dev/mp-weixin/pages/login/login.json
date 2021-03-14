@@ -3,6 +3,8 @@
   "enablePullDownRefresh": false,
   "usingComponents": {
     "u-input": "/uview-ui/components/u-input/u-input",
-    "u-tag": "/uview-ui/components/u-tag/u-tag"
+    "u-toast": "/uview-ui/components/u-toast/u-toast",
+    "u-verification-code": "/uview-ui/components/u-verification-code/u-verification-code",
+    "u-button": "/uview-ui/components/u-button/u-button"
   }
 }

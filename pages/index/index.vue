@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="background">
+		<view class="background" :style="{display:m_bg_hidden}">
 		    <image 
 		        class="preface" 
 		        src="@/static/jpg/login/loading.gif"
@@ -9,12 +9,12 @@
 		    </image>
 		</view>
 		<view :style="{display:m_hidden}" class="content">
-		    <view class="header" :style="{paddingTop: cap_info.top+'px'}" >
-		        <view class="text"
-		        :style="{marginLeft: cap_info.height+'px'}">
-		            {{name}}老师，欢迎您
-		        </view>
-		    </view>
+			<header-ryan :title="name+'老师，欢迎您'" 
+				:top="cap_info.top"
+				:left="cap_info.height">
+				
+			</header-ryan>
+		   
 			<u-swiper :list="swiperList" mode="round" 
 				:effect3d="true"
 				:title="true"
@@ -34,10 +34,12 @@
 	
 	import achievement from "@/components/achievement/achievement.vue";
 	import evaluation from "@/components/evaluation/evaluation.vue";
+	import headerRyan from "@/components/header/header.vue";
 	export default {
 		components:{
 			achievement,
-			evaluation
+			evaluation,
+			headerRyan
 		},
 		data() {
 			return {
@@ -57,73 +59,42 @@
 						title: '谁念西风独自凉，萧萧黄叶闭疏窗'
 					}
 				],
-				e:{
-				  elabel:"2019-1 学评教",
-				  srank:{
-					name:"学校排名",
-					value:"100"
-				  },
-				  prank:{
-					name:"学院排名",
-					value:"100"
-				  },
-				  score:{
-					name:"总共得分",
-					value:"100"
-				  },
-				  participate:{
-					name:"参评人次",
-					value:"100"
-				  },
-				},
+				e:{},
 				c:[],
-				a:{
-				  alabel:"2018-2019 教学业绩考核",
-				  accident:"未", //已出现教学事故
-				  info:"S3总分100分封顶，S4总分100分封顶", // 备注
-				  aitem:[
-					{
-					  icon:"icon-grade",
-					  name:"考核等级",
-					  value:"A"
-					},
-					{
-					  icon:"icon-time",
-					  name:"教学学时",
-					  value:"100"
-					},
-					{
-					  icon:"icon-score",
-					  name:"考核分数",
-					  value:"100"
-					}
-				  ] 
-				},
+				a:{},
 				m_hidden:"none",
+				m_bg_hidden: "",
 				zIndex:10,
-				cap_info:{},
+				cap_info:{}
 			}
 		},
-		onLoad() {
-			var _this = this;
+		methods:{
+			loadingComplete(){
+				this.m_hidden="";
+				this.m_bg_hidden="none"
+				
+			}
+		},
+		onLoad: function (options){
+			let _this = this;
+			let access = uni.getStorageSync('a').toString();
 			this.app = getApp().globalData;
-		
+			
 			this.name = this.app.Tname;
 			this.cap_info=this.app.cap_info;
 			this.user=this.app.user;
 			
 			uni.request({
 			  method:'post',
-			  url: this.app.url+"/AgetLast", //仅为示例，并非真实的接口地址
+			  url: _this.app.url+"/AGetLast", //仅为示例，并非真实的接口地址
 			  data: {
-				"ATid": this.app.Tid,
-				"access": uni.getStorageSync('a')
+				"ATid": _this.app.Tid,
+				"access": access
 			  },
 			  header: {
 				  'content-type': 'application/x-www-form-urlencoded'
 			  },
 			  success: function(res) {
-				  console.log("index");
 				if(res.data.code==0){    
 				    var temp = res.data.info;
 				    _this.a={
@@ -132,18 +103,18 @@
 					  info: temp.Ainfo,
 					  aitem:[
 						{
-						  icon:"icon-grade",
-						  name:"考核等级",
+						  icon: _this.app.title.a[0].icon,
+						  name: _this.app.title.a[0].name,
 						  value: temp.Agrade
 						},
 						{
-						  icon:"icon-time",
-						  name:"教学学时",
+						  icon: _this.app.title.a[1].icon,
+						  name: _this.app.title.a[1].name,
 						  value: temp.Ahour
 						},
 						{
-						  icon:"icon-score",
-						  name:"考核分数",
+						  icon: _this.app.title.a[2].icon,
+						  name: _this.app.title.a[2].name,
 						  value: temp.Ascore
 						}
 					  ]
@@ -154,17 +125,17 @@
 				console.log("fail AgetLast years"+res);
 			  },
 			  complete: () => {
-				// console.log(1)
-			  	_this.m_hidden="";
+				 // _this.loadingComplete(); 
+			  	
 			  }
-			})
+			});
 		
 			uni.request({
 			  method:'post',
-			  url: this.app.url+"/CgetLast", //仅为示例，并非真实的接口地址
+			  url: _this.app.url+"/CGetLast", //仅为示例，并非真实的接口地址
 			  data: {
-				"CTid": this.app.Tid,
-				"access": uni.getStorageSync('a')
+				"CTid": _this.app.Tid,
+				"access": access
 			  },
 			  header: {
 				  'content-type': 'application/x-www-form-urlencoded'
@@ -178,27 +149,27 @@
 					cid: _item.CCid,
 					item:[
 					  {
-						name:"总共得分",
+						name:_this.app.title.c[0],
 						value: _item.Cscore
 					  },
 					  {
-						name:"参评人数",
+						name:_this.app.title.c[1],
 						value: _item.Cparticipate
 					  },
 					  {
-						name:"教学能力",
+						name:_this.app.title.c[2],
 						value:_item.Cscore_1
 					  },
 					  {
-						name:"教学态度",
+						name:_this.app.title.c[3],
 						value:_item.Cscore_2
 					  },
 					  {
-						name:"师生交流",
+						name:_this.app.title.c[4],
 						value:_item.Cscore_3
 					  },
 					  {
-						name:"教学效果",
+						name:_this.app.title.c[5],
 						value:_item.Cscore_4
 					  }
 					]
@@ -211,95 +182,55 @@
 				console.log("fail CgetLast years"+res);
 			  },
 			  complete: () => {
-				  // console.log(2)
-			  	_this.m_hidden="";
+				// _this.loadingComplete(); 
 			  }
-			})
+			});
 			
 			uni.request({
 			  method:'post',
-			  url: _this.app.url+"/EgetLast", //仅为示例，并非真实的接口地址
+			  url: _this.app.url+"/EGetLast", //仅为示例，并非真实的接口地址
 			  data: {
 				"ETid": _this.app.Tid,
-				"access": uni.getStorageSync('a')
+				"access": access
 			  },
 			  header: {
 				  'content-type': 'application/x-www-form-urlencoded'
 			  },
 			  success: function(res) {
 				if(res.data.code==0){
-					_this.e.elabel = res.data.info.Etime;
-					_this.e.srank.value=res.data.info.Esrank;
-					_this.e.prank.value=res.data.info.Eprank;
-					_this.e.score.value=res.data.info.Escore;
-					_this.e.participate.value=res.data.info.Eparticipate;
+					_this.e={
+						elabel:res.data.info.Etime,
+						srank:{
+							value:res.data.info.Esrank,
+							name:_this.app.title.e[0]
+						},
+						prank:{
+							value:res.data.info.Eprank,
+							name:_this.app.title.e[1]
+						},
+						score:{
+							value:res.data.info.Escore,
+							name:_this.app.title.e[2]
+						},
+						participate:{
+							value: res.data.info.Eparticipate,
+							name:_this.app.title.e[3]
+						}
+					}
 				}
 			  },
 			  fail:function (res) {
 				console.log("fail EgetLast years"+res);
 			  },
 			  complete: () => {
-				  // console.log(3)
-			  	_this.m_hidden="";
+				_this.loadingComplete(); 
 			  }
 			})
-			// console.log("EGetAllYears");
-			uni.request({
-			  method:'post',
-			  url: _this.app.url+"/EGetAllYears", //仅为示例，并非真实的接口地址
-			  data: {
-				"ETid": _this.app.Tid,
-				"access": uni.getStorageSync('a')
-			  },
-			  header: {
-				  'content-type': 'application/x-www-form-urlencoded'
-			  },
-			  success: function(res) {
-				var a = [];
-				for (var _item of res.data.info){
-				  a.push({name:_item,css:""})
-				}
-				_this.app.Eyear = a;
-			  },
-			  fail:function (res) {
-				console.log("fail EGetAll years"+res);
-			  }
-			});
-			// console.log("AGetAllYears");
-			uni.request({
-			      method:'post',
-			      url: _this.app.url+"/AGetAllYears", //仅为示例，并非真实的接口地址
-			      data: {
-			        "ATid": _this.app.Tid,
-			        "access": uni.getStorageSync('a')
-			      },
-			      header: {
-			          'content-type': 'application/x-www-form-urlencoded'
-			      },
-			      success: function(res) {
-			        if(res.data.code==0){
-			          var a = [];
-			          for (var _item of res.data.info){
-			            a.push({name:_item,css:""})
-			          }
-			          _this.app.Ayear = a;
-			        }
-			      },
-			      fail:function (res) {
-			        console.log("fail EGetAll years"+res);
-			      }
-			})
-			
-			
-			
-			
 		},
-		
 	}
 </script>
 
 
 <style lang="less">
 	@import url("@/common/uni.less");
-	@import "./index.less";
 </style>

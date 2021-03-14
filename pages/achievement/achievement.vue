@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="background" :style="{display:m_hidden}">
+		<view class="background" :style="{display:m_bg_hidden}">
 		    <image 
 		        class="preface" 
 		        src="@/static/jpg/login/loading.gif"
@@ -9,43 +9,34 @@
 		    </image>
 		</view>
 		
-		<view class="content">
-		    <view 
-		        class="shield"
-		        :style="[{zIndex:z_shield},{backgroundColor: opacity_shield}]"
-		        @tap = "shield"
-		    >   
-		    </view>
-		    
-		    <view class="header" :style="{paddingTop: cap_info.top+'px'}">
-		        <view class="text"
-					:style="{marginLeft:cap_info.height+'px'}">
-		            <view class="years" @tap="choiceChange_1">
-		                <span class="years-name">
-							{{combobox.name}}
-						</span>
-		                <span class="years-icon psl_font icon-down">
-		    
-		                </span>
-		            </view>
-		            教学业绩考核
-		        </view>
-		    </view>
-		    
-		    <view :class="'choice '+hide.choice_1">
-		        <view 
-		            :class="'title '+item_title.css" 
-		            v-for="(item_title,index_title) in combobox.child"
-		            :key="index_title"
-		            @tap = "filter"
-					data-type="0"
-					:data-choice = "index_title"
-		            >
-		            {{item_title.name}}
-		        </view>
-		    </view>
-		    
-			<achievement :a="a"></achievement>
+		<view class="content" :style="{display:m_hidden}">
+			<header-ryan title="历年教学业绩考核"
+				:top="cap_info.top"
+				:left="cap_info.height">
+				
+			</header-ryan>
+			<u-dropdown class="achievement" 
+				ref="uDropdown" @open="open" @close="close" :border-bottom="true"
+				>
+				<u-dropdown-item 
+					v-key="index"
+					v-for="(item,index) in option"
+					v-model="event[index].m" 
+					:title="item[event[index].m-3*index].label" 
+					:options="item" 
+					@change="change">
+				</u-dropdown-item>
+			</u-dropdown>
+			
+			<!-- <view class="animate__animated" hover-class="tada"> -->
+
+			<view 
+				:class="ani" 
+				v-if="ani_if"
+				v-for="(item,index) in array_a">
+				<achievement :a="item"></achievement>
+			</view>
+			
 			
 		</view>
 	</view>
@@ -53,153 +44,186 @@
 
 <script>
 	import achievement from "@/components/achievement/achievement.vue";
+	
+	import headerRyan from "@/components/header/header.vue";
+	var _this;
 	export default {
 		components:{
-			achievement
+			achievement,
+			headerRyan
 		},
 		data() {
 			return {
+				ani_if: true,
+				ani: "animated fadeInUp",
+				animation: {},
+				animationData: {},
+				event: [{m:0},{m:3}], //0 1 2 || 3 4
 				app:{},
-				hide:{
-					choice_1:"choice_hide",
-				},
 				cap_info:{},
-				combobox:{},
-				a:{
-					  alabel:"2018-2019 教学业绩考核",
-					  accident:"未", //已出现教学事故
-					  info:"S3总分100分封顶，S4总分100分封顶", // 备注
-					  aitem:[
-						{
-						  icon:"icon-grade",
-						  name:"考核等级",
-						  value:"A"
-						},
-						{
-						  icon:"icon-time",
-						  name:"教学学时",
-						  value:"100"
-						},
-						{
-						  icon:"icon-score",
-						  name:"考核分数",
-						  value:"100"
-						}
-					  ] 
-				},
-				opacity_shield:"transparent",
-				z_shield:0,
-				scrollEnable:"relative",
-				m_hidden:"",
+				option: [],
+				array_a:[],
+				m_hidden:"none",
+				m_bg_hidden:""
 			}
 		},
 		methods:{
-			shield:function(e) {
-				let type = parseInt(e.currentTarget.dataset.type);
-				
-				this.hide.choice_1="choice_hide"; 
-		
-				this.opacity_shield="#00000020";
-				this.z_shield=0;
-				this.scrollEnable="relative";
+			open(index) {
+				// 展开某个下来菜单时，先关闭原来的其他菜单的高亮
+				// 同时内部会自动给当前展开项进行高亮
+				this.$refs.uDropdown.highlight();
+			},
+			close(index) {
+				// 关闭的时候，给当前项加上高亮
+				// 当然，您也可以通过监听dropdown-item的@change事件进行处理
+				this.$refs.uDropdown.highlight(index);
+			},
+			loading: function(){
+				this.m_hidden="none";
+				this.m_bg_hidden="";
+			},
+			loadingComplete: function(){
+				this.m_hidden="";
+				this.m_bg_hidden="none";
+			},
+			sort_(e){
+				// sorting the archievements
+				let sort = e[1].m-3;
+				let event = e[0].m;
+				if(event==0){
+					_this.array_a.sort(function(a,b){
+						let result = a.aitem[event].value.localeCompare(b.aitem[event].value)
+						if(sort==1&&result==1) return -1;
+						else if(sort==1&&result<1) return 1;
+						else return result;
+					})
+				}
+				else{
+					_this.array_a.sort(function(a,b){
+						let result = a.aitem[event].value-b.aitem[event].value;
+						return sort ?result:(-result);
+					})
+				}
 				
 			},
-			filter:function(e){
-				
-				let _combobox = this.combobox;
-				let last_index = this.combobox.last_index;
-				let choice = parseInt(e.currentTarget.dataset.choice);
-				_combobox.child[last_index].css = "";
-				_combobox.child[choice].css="active";
-				_combobox.name = _combobox.child[last_index].name;
-		
-				_combobox.last_index = choice;
-				this.combobox = _combobox;
-				this.choiceChange_1();
+			fadeInUp(){
+				_this.ani = "animated fadeInUp";
 			},
-			choiceChange_1:function () {
-				// console.log("change_1",this.hide.filter,this.hide.choice_1,this.hide.choice_2,this.hide.choice_3);
-				if(this.hide.choice_1=="choice_hide"){
-					this.opacity_shield="#00000010";
-					this.z_shield=3;
-					this.scrollEnable="fixed";
-		
-					this.hide.choice_1="";
-				} 
-				else if(this.hide.choice_1==""){
-					this.hide.choice_1="choice_hide";
-					this.opacity_shield="transparent";
-					this.z_shield=0;
-					this.scrollEnable="relative";
+			change(e){
+				_this.ani_if = false;
+				_this.fadeInUp();
+				_this.sort_(_this.event);
+				_this.$nextTick(() => {
+					_this.ani_if = true;
+				});
+				// _this.ani_if = true;
+				
+				// _this.$nextTick(() => {
 					
-				} 
+				// });
+				
 			},
-		},
-		onLoad: function () {
-			var _this = this;
-			this.app = getApp().globalData;
-		      let _combobox = {
-		        last_index: 0,
-		        name: "",
-		        child: this.app.Ayear
-		      };
-			  console.log(_combobox);
-		      let index = _combobox.last_index;
-		      _combobox.name = _combobox.child[index].name;
-		      _combobox.child[index].css = "active";
-		
-		      uni.request({
-		        method:'post',
-		        url: _this.app.url+"/AGetOne", 
-		        data: {
-		          "ATid": _this.app.Tid,
-		          "year": _combobox.child[index].name,
-		          "access": uni.getStorageSync('a')
-		        },
-		        header: {
-		          'content-type': 'application/x-www-form-urlencoded'
-		        },
-		        success: function(res) {
-		            if(res.data.code==0){    
-		                let temp = res.data.info;
-		                _this.a={
-		                    alabel: temp.Atime+"-"+(temp.Atime+1)+" 教学业绩考核",
-		                    accident: temp=="否"?"有":"未", //已出现教学事故
-		                    info: temp.Ainfo,
-		                    aitem:[
-								{
-									icon:"icon-grade",
-									name:"考核等级",
-									value: temp.Agrade
-								},
-								{
-									icon:"icon-time",
-									name:"教学学时",
-									value: temp.Ahour
-								},
-								{
-									icon:"icon-score",
-									name:"考核分数",
-									value: temp.Ascore
-								}
-		                    ]
+			option_init: function(){
+				let array_option = this.app.title.a;
+				this.option = [
+					[
+						{
+							label:array_option[0].name,
+							value:0
+						},
+						{
+							label:array_option[1].name,
+							value:1
+						},
+						{
+							label:array_option[2].name,
+							value:2
 						}
-		                
-		            }
-		        }
-			})
+					],
+					[
+						{
+							label:"由高到低",
+							value:3
+						},
+						{
+							label:"由低到高",
+							value:4
+						}
+					]
+				]
+			}
+		},
 		
-			this.cap_info = this.app.cap_info;
-			this.combobox=_combobox;
-			// this.animation = uni.createAnimation();
-		}, 
-		onReady() {
-			this.m_hidden="none";
+		onLoad: function () {
+			_this = this;
+			let access = uni.getStorageSync('a').toString();
+			_this.app = getApp().globalData;
+			_this.cap_info = _this.app.cap_info;
+
+			_this.option_init();
+			_this.sort_(_this.event);
+			
+			uni.request({
+			  method:'post',
+			  url: _this.app.url+"/AGetAll", //仅为示例，并非真实的接口地址
+			  data: {
+				"ATid": _this.app.Tid,
+				"access": access
+			  },
+			  header: {
+				  'content-type': 'application/x-www-form-urlencoded'
+			  },
+			  success: function(res) {
+				if(res.data.code==0){    
+				    var temp_array = res.data.info;
+					for (let temp of temp_array) {
+						// console.log(temp_array[temp]);
+						_this.array_a.push({
+							alabel: temp.Atime+"-"+(temp.Atime+1),
+							accident: temp=="否"?"有":"未", //已出现教学事故
+							info: temp.Ainfo,
+							aitem:[
+							{
+								icon: _this.app.title.a[0].icon,
+								name: _this.app.title.a[0].name,
+								value: temp.Agrade
+							},
+							{
+								icon: _this.app.title.a[1].icon,
+								name: _this.app.title.a[1].name,
+								value: temp.Ahour
+							},
+							{
+								icon: _this.app.title.a[2].icon,
+								name: _this.app.title.a[2].name,
+								value: temp.Ascore
+							}
+							]
+						});
+					}
+				}
+			  },
+			  fail:function (res) {
+				console.log("fail AgetAll years"+res);
+			  },
+			  complete: () => {
+				 _this.loadingComplete(); 
+			  }
+			});
+			
+			
 		}
 	}
 </script>
 
 <style lang="less">
 	@import url("@/common/uni.less");
-	@import "./achievement.less";
+
+	.achievement{
+		z-index: 99;
+	} 
+</style>
+
+<style>
+	@import '@/common/animate.css';
 </style>

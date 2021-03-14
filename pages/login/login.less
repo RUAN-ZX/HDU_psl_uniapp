@@ -1,20 +1,9 @@
 .background {
-    // height: 1700rpx;
     width: 750rpx;
     position: relative;
-    // background-color: @bgColor;
     z-index: 0;
   }
 
-
-.iconfont {
-    font-family: "iconfont" !important;
-    font-size: normal;
-    color: @themeColor;
-    font-style: normal;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
 
 
 .login{
@@ -28,16 +17,19 @@
     position: relative;
     display: flex;
     flex-direction: row;
-    line-height: 40px;
+	padding-bottom: 5px;
     border-bottom: 1px solid @lineColor;
-    // .login_iconfont{
-    //   text-align: center;
-    //   font-size: 20px;
-    //   flex: 1;
-    // }
+    .login_iconfont{
+		height: 35px;
+		line-height: 35px;
+		text-align: center;
+		font-size: 24px;
+		flex: 1;
+		color: @themeColor;
+		padding-bottom: 5px;
+    }
     .user_input{
       flex: 9;
-      height: 40px;
       font-size: 16px;
     }
     .text{
@@ -52,40 +44,38 @@
     position: relative;
     display: flex;
     flex-direction: row;
-    line-height: 40px;
-
-    
+    padding-bottom: 5px;
     border-bottom: 1px solid @lineColor;
-
+	.login_iconfont{
+		height: 35px;
+		line-height: 35px;
+		text-align: center;
+		font-size: 24px;
+		flex: 1;
+		margin-bottom: 5px;
+		color: @themeColor;
+	}
     .psw_input{
-      flex: 7;
-      height: 40px;
-      font-size: 16px;
+		flex: 5;
+		font-size: 16px;
     }
     .password{
       color: @labelColor;
       font-size: 16px;
     }
-	.wrap{
-		height: 20px;
-	}
+	
     .captcha{
-      margin: 10px 0 0 @padding;
-    //   margin-bottom: 10px;
-      text-align: center;
-      // flex: 3;
-      height: 20px;
-      font-size: 12px;
-      line-height: 20px;
-	  
-      opacity: 1.0;
-      display: block;
-      transition: 0.3s opacity ease-out;
+	  flex: 4;	
+      // margin: 0 0 0 @padding;
+      // text-align: center;
+      // height: 35px;
+      // line-height: 35px;
+      // font-size: 12px;
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  margin-bottom: 5px;
     }
-    .captcha:active{
-      opacity: 0.1;
-    }
-
   }
 
   .hint{

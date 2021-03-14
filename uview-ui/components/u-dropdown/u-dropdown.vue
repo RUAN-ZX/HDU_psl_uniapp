@@ -196,7 +196,7 @@
 				this.current = 99999;
 				// 下拉内容的样式进行调整，不透明度设置为0
 				this.contentStyle = {
-					zIndex: -1,
+					zIndex: 11,
 					opacity: 0
 				}
 			},

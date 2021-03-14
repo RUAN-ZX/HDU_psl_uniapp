@@ -1,5 +1,11 @@
 {
   "navigationBarTitleText": "",
   "enablePullDownRefresh": false,
-  "usingComponents": {}
+  "usingComponents": {
+    "u-dropdown": "/uview-ui/components/u-dropdown/u-dropdown",
+    "u-dropdown-item": "/uview-ui/components/u-dropdown-item/u-dropdown-item",
+    "evaluation": "/components/evaluation/evaluation",
+    "achievement": "/components/achievement/achievement",
+    "header-ryan": "/components/header/header"
+  }
 }

@@ -2,6 +2,9 @@
   "navigationBarTitleText": "",
   "enablePullDownRefresh": false,
   "usingComponents": {
-    "achievement": "/components/achievement/achievement"
+    "u-dropdown": "/uview-ui/components/u-dropdown/u-dropdown",
+    "u-dropdown-item": "/uview-ui/components/u-dropdown-item/u-dropdown-item",
+    "achievement": "/components/achievement/achievement",
+    "header-ryan": "/components/header/header"
   }
 }

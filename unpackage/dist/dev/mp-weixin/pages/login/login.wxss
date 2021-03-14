@@ -21,14 +21,6 @@
   position: relative;
   z-index: 0;
 }
-.iconfont {
-  font-family: "iconfont" !important;
-  font-size: normal;
-  color: #298FFE;
-  font-style: normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 .login {
   position: relative;
   margin: 20px;
@@ -43,14 +35,24 @@
   -webkit-box-direction: normal;
   -webkit-flex-direction: row;
           flex-direction: row;
-  line-height: 40px;
+  padding-bottom: 5px;
   border-bottom: 1px solid #efefef;
+}
+.login .user .login_iconfont {
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  font-size: 24px;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  color: #298FFE;
+  padding-bottom: 5px;
 }
 .login .user .user_input {
   -webkit-box-flex: 9;
   -webkit-flex: 9;
           flex: 9;
-  height: 40px;
   font-size: 16px;
 }
 .login .user .text {
@@ -67,36 +69,44 @@
   -webkit-box-direction: normal;
   -webkit-flex-direction: row;
           flex-direction: row;
-  line-height: 40px;
+  padding-bottom: 5px;
   border-bottom: 1px solid #efefef;
 }
+.login .psw .login_iconfont {
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  font-size: 24px;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  margin-bottom: 5px;
+  color: #298FFE;
+}
 .login .psw .psw_input {
-  -webkit-box-flex: 7;
-  -webkit-flex: 7;
-          flex: 7;
-  height: 40px;
+  -webkit-box-flex: 5;
+  -webkit-flex: 5;
+          flex: 5;
   font-size: 16px;
 }
 .login .psw .password {
   color: #afafaf;
   font-size: 16px;
 }
-.login .psw .wrap {
-  height: 20px;
-}
 .login .psw .captcha {
-  margin: 10px 0 0 30rpx;
-  text-align: center;
-  height: 20px;
-  font-size: 12px;
-  line-height: 20px;
-  opacity: 1;
-  display: block;
-  -webkit-transition: 0.3s opacity ease-out;
-  transition: 0.3s opacity ease-out;
-}
-.login .psw .captcha:active {
-  opacity: 0.1;
+  -webkit-box-flex: 4;
+  -webkit-flex: 4;
+          flex: 4;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  margin-bottom: 5px;
 }
 .login .hint {
   margin: 5px 0 5px 0;

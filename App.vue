@@ -1,3 +1,9 @@
+<style lang="scss">
+	/* 注意要写在第一行，同时给style标签加入lang="scss"属性 */
+	@import "./uview-ui/index.scss";
+	@import "./uview-ui/theme.scss";
+	
+</style>
 <script>
 	export default {
 		globalData: {  
@@ -18,12 +24,26 @@
 				avatar: "../../jpg/icon_div_2/1.jpg",
 				phone:""
 			},
-			Eyear: [
-				{name:"2016-1",css:"active"},
-			],
-			Ayear: [
-				{name:"2016",css:"active"},
-			],
+			
+			title: {
+				e:["总共得分","全校排名","本院排名","参评人次"],
+				c:["总共得分","参评人数","教学能力","教学态度","师生交流","教学效果"],
+				a:[
+					{
+						icon:"icon-grade",
+						name:"考核等级"
+					},
+					{
+						icon:"icon-time",
+						name:"教学学时"
+					},
+					{
+						icon:"icon-score",
+						name:"考核分数"
+					}
+				]
+			},
+			
 		}, 
 		onLaunch: function() {
 			console.log('App Launch')
@@ -56,12 +76,7 @@
 </script>
 
 
-
-<!-- 无法引用less变量！
-<style lang="less">
-	@import url("@/common/uni.less");
-</style> 
- -->
 <style>
 	@import "./common/psl_font.css";
+	@import "./common/animate.css";
 </style>
