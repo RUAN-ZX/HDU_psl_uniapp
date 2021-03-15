@@ -1,6 +1,11 @@
 <template>
-	<view class="header" :style="{paddingTop: top+'px'}" >
-	    <view class="text"
+	<view class="header" 
+		:style="{paddingTop: top+'px'}" >
+	    <view v-if="hasBack" class="back">
+			<u-icon name="arrow-left"
+			color="#f5f5f5" size="40" @click="navigateBack"></u-icon>
+		</view>
+		<view class="text"
 	    :style="{marginLeft: left+'px'}">
 	        {{title}}
 	    </view>
@@ -11,6 +16,10 @@
 	export default {
 		name: 'header-ryan',
 		props: {
+			hasBack:{
+				type:Boolean,
+				default: false
+			},
 			top:{
 				type: String,
 				default: "32"
@@ -26,6 +35,14 @@
 		},
 		data() {
 			return {
+				
+			}
+		},
+		methods:{
+			navigateBack: function(){
+				uni.navigateBack({
+					
+				})
 			}
 		}
 	}
@@ -41,10 +58,16 @@
 	    display: flex;
 	    flex-direction: row;
 	    background-color: @themeColor;
+		color: @bgColor;
+		
+		font-size: 20px;
+		.back{
+			font-weight: bolder;
+			width: 30px;
+			text-align: center;
+		}
 	    .text{
-	        color: @bgColor;
-	        font-size: 20px;
-	
+			flex: 1;
 	    }
 	} 
 </style>

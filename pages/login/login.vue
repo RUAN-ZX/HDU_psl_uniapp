@@ -1,6 +1,20 @@
 <template>
 	<view>
-		<image class="background" src="@/static/jpg/login/login_2.jpg" mode="widthFix">
+		<view class="background" style="display:none">
+		    <image 
+		        class="preface" 
+		        src="https://stea.ryanalexander.cn/psl/loading.gif"
+		        mode="widthFix"
+				crossorigin="anonymous"
+		    >
+		    </image>
+		</view>
+		
+		<image 
+			class="background" 
+			crossorigin="anonymous"
+			src="https://stea.ryanalexander.cn/psl/login_2.jpg"
+			mode="widthFix">
 		</image>
 		
 		<view class="login">
@@ -25,27 +39,28 @@
 		            type="password" 
 		            :placeholder="m_login.psw"
 		            v-model = "Tpwd"/>
-					
-					<u-toast ref="uToast"></u-toast>
-					<u-verification-code seconds="30" @end="end" @start="start" ref="uCode" 
-					@change="codeChange"
-					change-text="X秒后重新获取"
-					start-text="点击获取验证码"
-					end-text="再次获取验证码"></u-verification-code>
-					
-					<view class="captcha">
-						<u-button 
-							ripple="true"
-							plain="true"
-							size="mini"
-							:loading="getCaptchaBtnDisabled"
-							:disabled="getCaptchaBtnDisabled"
-							:type="getCaptchaBtnStatus" 
-							@click="getCaptcha">
-							{{getCaptchaHint}}
-						</u-button>
-					</view>
-					
+				
+				<u-toast ref="uToast"></u-toast>
+				<u-verification-code seconds="30" @end="end" @start="start" ref="uCode" 
+				@change="codeChange"
+				change-text="X秒后重新获取"
+				start-text="点击获取验证码"
+				end-text="再次获取验证码"></u-verification-code>
+				
+				<view class="captcha">
+					<u-button 
+						ripple="true"
+						plain="true"
+						size="mini"
+						:loading="getCaptchaBtnDisabled"
+						:disabled="getCaptchaBtnDisabled"
+						:type="getCaptchaBtnStatus" 
+						@click="getCaptcha">
+						{{getCaptchaHint}}
+						
+					</u-button>
+				</view>
+				
 				
 		    </view>
 		
@@ -54,18 +69,18 @@
 		    </view>
 		
 		
-		    <view class="loginBtn" url="../../pages/index/index" @tap ="login" hover-class="navigator-hover" open-type="navigate">
+		    <view class="loginBtn" @tap ="login" hover-class="navigator-hover" open-type="navigate">
 		        登录
 		    </view>
 		
 		    <view class="others">
 		
-		        <navigator class="others_email" url="../../pages/emailChangeLogin/emailChange" hover-class="navigator-hover" open-type="navigate">
+		        <navigator class="others_email" url="/pages/emailSetting/emailSetting" hover-class="navigator-hover" open-type="navigate">
 		            想换邮箱？
 		        </navigator>
 		        
 		        
-		        <navigator class="others_psw" url="../../pages/pwdChangeLogin/pwdChange" hover-class="navigator-hover" open-type="navigate">
+		        <navigator class="others_psw" url="/pages/pwdSetting/pwdSetting" hover-class="navigator-hover" open-type="navigate">
 		            密码忘了？
 		        </navigator>
 		    </view>
@@ -89,6 +104,7 @@
 				getCaptchaBtnStatus: "primary",
 				getCaptchaHint: "获取验证码",
 				app: {},
+				picUrl: "",
 				Tid:"",
 				Tpwd:"",
 				hint:"",
@@ -100,7 +116,6 @@
 		},
 		methods:{
 			codeChange(text) {
-				console.log("codeChange")
 				this.getCaptchaHint = text;
 			},
 			end() {
@@ -178,6 +193,10 @@
 							this_.$refs.uCode.start();
 						}, 1000);
 						
+					}else{
+						uni.hideLoading();
+						this_.$u.toast(res.data.info);
+						this_.setHint(res.data.info); 
 					}
 				  },
 				  fail:function(){
@@ -191,15 +210,13 @@
 			toIndex:function(res){
 				try{
 					uni.setStorageSync('a', res.data.info.a)
-					uni.setStorageSync('r', res.data.info.r)
+					uni.setStorage({key:'r',data: res.data.info.r});
 					this.app.Tid=uni.getStorageSync('i');
 					this.app.Tname=res.data.info.Tname;
-					console.log(this.app.Tid);
-					console.log(uni.getStorageSync('i'));
 					
-					console.log(this.app.Tname);
 					uni.switchTab({
 					  url: '/pages/index/index'
+					  
 					});
 				}
 				catch(e){console.log(e);}
@@ -208,6 +225,7 @@
 		
 		onLoad: function (options) {
 		  let this_ = this;
+		  
 		  this.app = getApp().globalData;
 		  
 		  let i = uni.getStorageSync('i');

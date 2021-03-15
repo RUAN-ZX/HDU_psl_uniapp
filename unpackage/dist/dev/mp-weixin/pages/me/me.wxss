@@ -1,0 +1,172 @@
+.background {
+  z-index: 99;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  height: 100vh;
+  position: fixed;
+  width: 100vw;
+}
+.background .preface {
+  width: 100%;
+}
+.ellipsis {
+  word-break: break-all;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  /* 超出部分省略号 */
+  overflow: hidden;
+  /*超出隐藏*/
+}
+.card {
+  padding: 20rpx;
+  background-color: #ffffff;
+  box-shadow: 6rpx 6rpx 15rpx 3rpx rgba(0, 0, 0, 0.21);
+  border-radius: 15rpx;
+  z-index: 1;
+  position: relative;
+}
+.header {
+  margin: 0;
+  position: relative;
+  height: 500rpx;
+  width: 100%;
+  display: block;
+}
+.header .imageHeader {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.header .imageHeader:after {
+  z-index: 5;
+  position: absolute;
+  width: 100%;
+  height: 500rpx;
+  top: 0;
+  left: 0;
+  content: "";
+  background: -webkit-linear-gradient(rgba(240, 248, 255, 0) 90%, #f0f8ff 100%);
+  background: linear-gradient(rgba(240, 248, 255, 0) 90%, #f0f8ff 100%);
+}
+.header .user {
+  position: absolute;
+  margin: 40px 0 0 40px;
+  height: 80px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+}
+.header .user .avatar {
+  height: 80px;
+  width: 80px;
+  border-radius: 80px;
+  box-shadow: -6rpx 6rpx 15rpx 3rpx #f9f9f9;
+}
+.header .user .name {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  font-size: 25px;
+  text-shadow: -6rpx 6rpx 15rpx #f9f9f9;
+  color: rgba(255, 255, 255, 0.8);
+  height: 30px;
+  line-height: 30px;
+  font-weight: bolder;
+  margin: auto 0 auto 10px;
+}
+.header .info {
+  position: absolute;
+  margin: 130px 0 0 0;
+  padding: 20px 30px 30px 30px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  width: 100vw;
+  font-weight: bold;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  text-shadow: -6rpx 6rpx 15rpx #f9f9f9;
+  color: rgba(255, 255, 255, 0.8);
+}
+.header .info .item {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  font-size: 16px;
+}
+.header .info .item .value {
+  height: 20px;
+  line-height: 20px;
+  text-shadow: -6rpx 6rpx 15rpx #f9f9f9;
+  color: rgba(255, 255, 255, 0.8);
+}
+.card_1 {
+  margin: 10px;
+  height: 90px;
+  z-index: 99;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  margin-top: -40px;
+  padding: 10px 0 10px 0;
+  -webkit-justify-content: space-around;
+          justify-content: space-around;
+}
+.card_1 .div_wrapper_1 {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  margin: 0 auto 0 auto;
+  opacity: 1;
+  display: block;
+  -webkit-transition: 0.3s opacity ease-out;
+  transition: 0.3s opacity ease-out;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+}
+.card_1 .div_wrapper_1 .div_1_iconfont {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  font-size: 50px;
+  text-align: center;
+  color: #298FFE;
+}
+.card_1 .div_wrapper_1 .div_text_1 {
+  color: #646464;
+  font-size: 12px;
+  text-align: center;
+}
+.inscribe {
+  width: 100vw;
+  position: fixed;
+  left: 30rpx;
+  bottom: 30rpx;
+  color: #afafaf;
+  font-size: 12px;
+  text-align: center;
+  margin-bottom: 0;
+}
+

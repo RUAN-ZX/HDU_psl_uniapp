@@ -40,6 +40,33 @@
             }
             
         }
+        ,{
+            "path" : "pages/emailSetting/emailSetting",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/pwdSetting/pwdSetting",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/feedback/feedback",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"backgroundTextStyle": "dark",
@@ -61,27 +88,28 @@
 		"list": [{
 			"pagePath": "pages/index/index",
 			"text": "最新数据",
-			"iconPath": "static/icon/index_.jpg",
-			"selectedIconPath": "static/icon/index.jpg"
+			"iconPath": "static/icon/index_.png",
+			"selectedIconPath": "static/icon/index.png"
 		},
 		{
 			"pagePath": "pages/evaluation/evaluation",
 			"text": "学评教",
-			"iconPath": "static/icon/feeling_.jpg",
-			"selectedIconPath": "static/icon/feeling.jpg"
+			"iconPath": "static/icon/evaluation_.png",
+			"selectedIconPath": "static/icon/evaluation.png"
 		},
 		{
 			"pagePath": "pages/achievement/achievement",
 			"text": "业绩考核",
-			"iconPath": "static/icon/consult_.jpg",
-			"selectedIconPath": "static/icon/consult.jpg"
+			"iconPath": "static/icon/achievement_.png",
+			"selectedIconPath": "static/icon/achievement.png"
 		},
 		{
 			"pagePath": "pages/me/me",
 			"text": "我的",
-			"iconPath": "static/icon/me_.jpg",
-			"selectedIconPath": "static/icon/me.jpg"
+			"iconPath": "static/icon/me_.png",
+			"selectedIconPath": "static/icon/me.png"
 		}
 		]
 	}
 }
+ 

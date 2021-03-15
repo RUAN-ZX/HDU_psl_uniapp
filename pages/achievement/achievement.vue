@@ -1,10 +1,11 @@
 <template>
 	<view>
-		<view class="background" :style="{display:m_bg_hidden}">
+		<view class="background" style="display:none">
 		    <image 
 		        class="preface" 
-		        src="@/static/jpg/login/loading.gif"
+		        src="https://stea.ryanalexander.cn/psl/loading.gif"
 		        mode="widthFix"
+				crossorigin="anonymous"
 		    >
 		    </image>
 		</view>
@@ -28,10 +29,9 @@
 				</u-dropdown-item>
 			</u-dropdown>
 			
-			<!-- <view class="animate__animated" hover-class="tada"> -->
-
 			<view 
-				:class="ani" 
+				:class="ani"
+				:style="{'animation-delay':index*0.1+'s'}"
 				v-if="ani_if"
 				v-for="(item,index) in array_a">
 				<achievement :a="item"></achievement>
@@ -55,7 +55,7 @@
 		data() {
 			return {
 				ani_if: true,
-				ani: "animated fadeInUp",
+				ani: "",
 				animation: {},
 				animationData: {},
 				event: [{m:0},{m:4}], //0 1 2 || 3 4
@@ -85,6 +85,7 @@
 			loadingComplete: function(){
 				this.m_hidden="";
 				this.m_bg_hidden="none";
+				_this.fadeInUp();
 			},
 			sort_(e){
 				// sorting the archievements
@@ -125,11 +126,6 @@
 				_this.$nextTick(() => {
 					_this.ani_if = true;
 				});
-				// _this.ani_if = true;
-				
-				// _this.$nextTick(() => {
-					
-				// });
 				
 			},
 			option_init: function(){
@@ -169,8 +165,10 @@
 		
 		onLoad: function () {
 			_this = this;
-			let access = uni.getStorageSync('a').toString();
+			_this.loading();
 			_this.app = getApp().globalData;
+			let access = uni.getStorageSync('a').toString();
+			
 			_this.cap_info = _this.app.cap_info;
 
 			_this.option_init();
@@ -214,17 +212,17 @@
 							]
 						});
 					}
+					
 				}
 			  },
 			  fail:function (res) {
 				console.log("fail AgetAll years"+res);
 			  },
 			  complete: () => {
-				 _this.loadingComplete(); 
+				_this.loadingComplete();
+				
 			  }
 			});
-			
-			
 		}
 	}
 </script>

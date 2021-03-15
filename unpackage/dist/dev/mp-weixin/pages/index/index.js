@@ -96,13 +96,13 @@ var components
 try {
   components = {
     uSwiper: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-swiper/u-swiper */ "uview-ui/components/u-swiper/u-swiper").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-swiper/u-swiper.vue */ 113))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-swiper/u-swiper */ "uview-ui/components/u-swiper/u-swiper").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-swiper/u-swiper.vue */ 137))
     },
     achievement: function() {
-      return __webpack_require__.e(/*! import() | components/achievement/achievement */ "components/achievement/achievement").then(__webpack_require__.bind(null, /*! @/components/achievement/achievement.vue */ 120))
+      return __webpack_require__.e(/*! import() | components/achievement/achievement */ "components/achievement/achievement").then(__webpack_require__.bind(null, /*! @/components/achievement/achievement.vue */ 144))
     },
     evaluation: function() {
-      return __webpack_require__.e(/*! import() | components/evaluation/evaluation */ "components/evaluation/evaluation").then(__webpack_require__.bind(null, /*! @/components/evaluation/evaluation.vue */ 127))
+      return __webpack_require__.e(/*! import() | components/evaluation/evaluation */ "components/evaluation/evaluation").then(__webpack_require__.bind(null, /*! @/components/evaluation/evaluation.vue */ 151))
     }
   }
 } catch (e) {
@@ -159,7 +159,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var achievement = function achievement() {__webpack_require__.e(/*! require.ensure | components/achievement/achievement */ "components/achievement/achievement").then((function () {return resolve(__webpack_require__(/*! @/components/achievement/achievement.vue */ 120));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var evaluation = function evaluation() {__webpack_require__.e(/*! require.ensure | components/evaluation/evaluation */ "components/evaluation/evaluation").then((function () {return resolve(__webpack_require__(/*! @/components/evaluation/evaluation.vue */ 127));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var headerRyan = function headerRyan() {__webpack_require__.e(/*! require.ensure | components/header/header */ "components/header/header").then((function () {return resolve(__webpack_require__(/*! @/components/header/header.vue */ 134));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var achievement = function achievement() {__webpack_require__.e(/*! require.ensure | components/achievement/achievement */ "components/achievement/achievement").then((function () {return resolve(__webpack_require__(/*! @/components/achievement/achievement.vue */ 144));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var evaluation = function evaluation() {__webpack_require__.e(/*! require.ensure | components/evaluation/evaluation */ "components/evaluation/evaluation").then((function () {return resolve(__webpack_require__(/*! @/components/evaluation/evaluation.vue */ 151));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var headerRyan = function headerRyan() {__webpack_require__.e(/*! require.ensure | components/header/header */ "components/header/header").then((function () {return resolve(__webpack_require__(/*! @/components/header/header.vue */ 158));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
 
 
@@ -196,6 +196,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+var _this;var _default =
 {
   components: {
     achievement: achievement,
@@ -204,19 +215,20 @@ __webpack_require__.r(__webpack_exports__);
 
   data: function data() {
     return {
+      ani: "",
       app: {},
       name: "",
-
+      ani_if: true,
       swiperList: [{
-        image: 'http://www.hdu.edu.cn/uploads/images/20200423/202004231246411000.jpg',
+        image: 'https://stea.ryanalexander.cn/psl/hdu1.jpg',
         title: '昨夜星辰昨夜风，画楼西畔桂堂东' },
 
       {
-        image: 'http://www.hdu.edu.cn/uploads/images/20190401/201904011018051000.jpg',
+        image: 'https://stea.ryanalexander.cn/psl/hdu2.jpg',
         title: '身无彩凤双飞翼，心有灵犀一点通' },
 
       {
-        image: 'http://www.hdu.edu.cn/uploads/images/20190912/201909121632111000.jpg',
+        image: 'https://stea.ryanalexander.cn/psl/hdu3.jpg',
         title: '谁念西风独自凉，萧萧黄叶闭疏窗' }],
 
 
@@ -230,20 +242,50 @@ __webpack_require__.r(__webpack_exports__);
 
   },
   methods: {
+    loading: function loading() {
+      this.m_hidden = "none";
+      this.m_bg_hidden = "";
+    },
     loadingComplete: function loadingComplete() {
       this.m_hidden = "";
       this.m_bg_hidden = "none";
+      _this.fadeInUp();
+    },
+    fadeInUp: function fadeInUp() {
+      _this.ani = "animated fadeInUp";
+    },
+    change: function change(e) {
+      _this.ani_if = false;
+      _this.fadeInUp();
+      _this.sort_(_this.event);
+      _this.$nextTick(function () {
+        _this.ani_if = true;
+      });
+
+    },
+    test_timeout: function test_timeout() {
+      for (var i = 0; i < 50; i++) {
+        var access = uni.getStorageSync('a').toString();
+      }
+
 
     } },
 
+
+
   onLoad: function onLoad(options) {
-    var _this = this;
+    _this = this;
+    _this.loading();
+
+
     var access = uni.getStorageSync('a').toString();
     this.app = getApp().globalData;
 
     this.name = this.app.Tname;
     this.cap_info = this.app.cap_info;
     this.user = this.app.user;
+
+    // this.test_timeout();
 
     uni.request({
       method: 'post',
@@ -284,11 +326,8 @@ __webpack_require__.r(__webpack_exports__);
       },
       fail: function fail(res) {
         console.log("fail AgetLast years" + res);
-      },
-      complete: function complete() {
-        // _this.loadingComplete(); 
-
       } });
+
 
 
     uni.request({
@@ -309,9 +348,6 @@ __webpack_require__.r(__webpack_exports__);
       },
       fail: function fail(res) {
         console.log("fail CgetLast years" + res);
-      },
-      complete: function complete() {
-        // _this.loadingComplete(); 
       } });
 
 
@@ -328,13 +364,15 @@ __webpack_require__.r(__webpack_exports__);
       success: function success(res) {
         if (res.data.code == 0) {
           _this.e = res.data.info;
+          _this.$nextTick(function () {
+            _this.loadingComplete();
+          });
+
         }
+
       },
       fail: function fail(res) {
         console.log("fail EgetLast years" + res);
-      },
-      complete: function complete() {
-        _this.loadingComplete();
       } });
 
   } };exports.default = _default;

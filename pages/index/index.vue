@@ -1,10 +1,11 @@
 <template>
 	<view>
-		<view class="background" :style="{display:m_bg_hidden}">
+		<view class="background" style="display:none">
 		    <image 
 		        class="preface" 
-		        src="@/static/jpg/login/loading.gif"
+		        src="https://stea.ryanalexander.cn/psl/loading.gif"
 		        mode="widthFix"
+				crossorigin="anonymous"
 		    >
 		    </image>
 		</view>
@@ -22,9 +23,18 @@
 			>	
 			</u-swiper>
 
+		    <view @click="change" :class="ani" v-if="ani_if">
+				<achievement :a="a"></achievement>
+		
+			</view>
 		    
-		    <achievement :a="a"></achievement>
-			<evaluation :title="app.title" :e="e" :c="c"></evaluation>
+			<view 
+				:class="ani" 
+				v-if="ani_if"
+				:style="{'animation-delay':0.1+'s'}">
+				<evaluation
+				:title="app.title" :e="e" :c="c"></evaluation>
+			</view>
 			
 		</view>
 	</view>
@@ -35,6 +45,7 @@
 	import achievement from "@/components/achievement/achievement.vue";
 	import evaluation from "@/components/evaluation/evaluation.vue";
 	import headerRyan from "@/components/header/header.vue";
+	var _this;
 	export default {
 		components:{
 			achievement,
@@ -43,19 +54,20 @@
 		},
 		data() {
 			return {
+				ani: "",
 				app: {},
 				name:"",
-				
+				ani_if: true,
 				swiperList: [{
-						image: 'http://www.hdu.edu.cn/uploads/images/20200423/202004231246411000.jpg',
+						image: 'https://stea.ryanalexander.cn/psl/hdu1.jpg',
 						title: '昨夜星辰昨夜风，画楼西畔桂堂东'
 					},
 					{
-						image: 'http://www.hdu.edu.cn/uploads/images/20190401/201904011018051000.jpg',
+						image: 'https://stea.ryanalexander.cn/psl/hdu2.jpg',
 						title: '身无彩凤双飞翼，心有灵犀一点通'
 					},
 					{
-						image: 'http://www.hdu.edu.cn/uploads/images/20190912/201909121632111000.jpg',
+						image: 'https://stea.ryanalexander.cn/psl/hdu3.jpg',
 						title: '谁念西风独自凉，萧萧黄叶闭疏窗'
 					}
 				],
@@ -69,20 +81,50 @@
 			}
 		},
 		methods:{
-			loadingComplete(){
+			loading: function(){
+				this.m_hidden="none";
+				this.m_bg_hidden="";
+			},
+			loadingComplete: function(){
 				this.m_hidden="";
-				this.m_bg_hidden="none"
+				this.m_bg_hidden="none";
+				_this.fadeInUp();
+			},
+			fadeInUp(){
+				_this.ani = "animated fadeInUp";
+			},
+			change(e){
+				_this.ani_if = false;
+				_this.fadeInUp();
+				_this.sort_(_this.event);
+				_this.$nextTick(() => {
+					_this.ani_if = true;
+				});
+				
+			},
+			test_timeout(){
+				for (var i = 0; i < 50; i++) {
+					let access = uni.getStorageSync('a').toString();
+				}
+				
 				
 			}
+			
 		},
+		
 		onLoad: function (options){
-			let _this = this;
+			_this = this;
+			_this.loading();
+			
+			
 			let access = uni.getStorageSync('a').toString();
 			this.app = getApp().globalData;
 			
 			this.name = this.app.Tname;
 			this.cap_info=this.app.cap_info;
 			this.user=this.app.user;
+			
+			// this.test_timeout();
 			
 			uni.request({
 			  method:'post',
@@ -123,12 +165,9 @@
 			  },
 			  fail:function (res) {
 				console.log("fail AgetLast years"+res);
-			  },
-			  complete: () => {
-				 // _this.loadingComplete(); 
-			  	
 			  }
 			});
+		
 		
 			uni.request({
 			  method:'post',
@@ -148,9 +187,6 @@
 			  },
 			  fail:function (res) {
 				console.log("fail CgetLast years"+res);
-			  },
-			  complete: () => {
-				// _this.loadingComplete(); 
 			  }
 			});
 			
@@ -167,16 +203,19 @@
 			  success: function(res) {
 				if(res.data.code==0){
 					_this.e=res.data.info;
+					_this.$nextTick(() => {
+						_this.loadingComplete(); 
+					});
+					
 				}
+				
 			  },
 			  fail:function (res) {
 				console.log("fail EgetLast years"+res);
-			  },
-			  complete: () => {
-				_this.loadingComplete(); 
 			  }
 			})
 		},
+		
 	}
 </script>
 
@@ -184,3 +223,4 @@
 <style lang="less">
 	@import url("@/common/uni.less");
 </style>
+

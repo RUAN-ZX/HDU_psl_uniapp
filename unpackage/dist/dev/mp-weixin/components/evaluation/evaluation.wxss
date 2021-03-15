@@ -1,5 +1,5 @@
 .background {
-  z-index: 0;
+  z-index: 99;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -15,6 +15,14 @@
 }
 .background .preface {
   width: 100%;
+}
+.ellipsis {
+  word-break: break-all;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  /* 超出部分省略号 */
+  overflow: hidden;
+  /*超出隐藏*/
 }
 .card {
   padding: 20rpx;

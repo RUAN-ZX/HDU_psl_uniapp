@@ -1,0 +1,94 @@
+.background {
+  z-index: 99;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  height: 100vh;
+  position: fixed;
+  width: 100vw;
+}
+.background .preface {
+  width: 100%;
+}
+.ellipsis {
+  word-break: break-all;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  /* 超出部分省略号 */
+  overflow: hidden;
+  /*超出隐藏*/
+}
+.card {
+  padding: 20rpx;
+  background-color: #ffffff;
+  box-shadow: 6rpx 6rpx 15rpx 3rpx rgba(0, 0, 0, 0.21);
+  border-radius: 15rpx;
+  z-index: 1;
+  position: relative;
+}
+.content {
+  margin: 30rpx;
+  border-radius: 30rpx;
+  border: 1px solid #afafaf;
+  width: auto;
+  padding: 0 30rpx 30rpx 30rpx;
+}
+.psw_captcha {
+  margin-top: 30rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+}
+.psw_captcha .psw_input {
+  -webkit-box-flex: 5;
+  -webkit-flex: 5;
+          flex: 5;
+  font-size: 16px;
+}
+.psw_captcha .password {
+  color: #afafaf;
+  font-size: 16px;
+}
+.psw_captcha .captcha {
+  -webkit-box-flex: 3;
+  -webkit-flex: 3;
+          flex: 3;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  margin-bottom: 5px;
+}
+.u-tabs-box {
+  width: 100vw;
+  position: position;
+}
+.swiper-box {
+  height: 100vh;
+}
+.swiper-box .swiper-item {
+  height: 100%;
+}
+.explaination {
+  margin-left: 18px;
+  margin-top: -20px;
+  display: block;
+  font-size: 12px;
+  color: #afafaf;
+}
+

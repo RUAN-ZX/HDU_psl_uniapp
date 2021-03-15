@@ -96,16 +96,16 @@ var components
 try {
   components = {
     uInput: function() {
-      return Promise.all(/*! import() | uview-ui/components/u-input/u-input */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-input/u-input")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-input/u-input.vue */ 84))
+      return Promise.all(/*! import() | uview-ui/components/u-input/u-input */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-input/u-input")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-input/u-input.vue */ 108))
     },
     uToast: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-toast/u-toast */ "uview-ui/components/u-toast/u-toast").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-toast/u-toast.vue */ 92))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-toast/u-toast */ "uview-ui/components/u-toast/u-toast").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-toast/u-toast.vue */ 116))
     },
     uVerificationCode: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-verification-code/u-verification-code */ "uview-ui/components/u-verification-code/u-verification-code").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-verification-code/u-verification-code.vue */ 99))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-verification-code/u-verification-code */ "uview-ui/components/u-verification-code/u-verification-code").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-verification-code/u-verification-code.vue */ 123))
     },
     uButton: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-button/u-button */ "uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-button/u-button.vue */ 106))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-button/u-button */ "uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-button/u-button.vue */ 130))
     }
   }
 } catch (e) {
@@ -238,6 +238,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -253,6 +268,7 @@ var _default =
       getCaptchaBtnStatus: "primary",
       getCaptchaHint: "获取验证码",
       app: {},
+      picUrl: "",
       Tid: "",
       Tpwd: "",
       hint: "",
@@ -264,7 +280,6 @@ var _default =
   },
   methods: {
     codeChange: function codeChange(text) {
-      console.log("codeChange");
       this.getCaptchaHint = text;
     },
     end: function end() {
@@ -342,6 +357,10 @@ var _default =
                 this_.$refs.uCode.start();
               }, 1000);
 
+            } else {
+              uni.hideLoading();
+              this_.$u.toast(res.data.info);
+              this_.setHint(res.data.info);
             }
           },
           fail: function fail() {
@@ -355,15 +374,13 @@ var _default =
     toIndex: function toIndex(res) {
       try {
         uni.setStorageSync('a', res.data.info.a);
-        uni.setStorageSync('r', res.data.info.r);
+        uni.setStorage({ key: 'r', data: res.data.info.r });
         this.app.Tid = uni.getStorageSync('i');
         this.app.Tname = res.data.info.Tname;
-        console.log(this.app.Tid);
-        console.log(uni.getStorageSync('i'));
 
-        console.log(this.app.Tname);
         uni.switchTab({
           url: '/pages/index/index' });
+
 
       }
       catch (e) {console.log(e);}
@@ -372,6 +389,7 @@ var _default =
 
   onLoad: function onLoad(options) {
     var this_ = this;
+
     this.app = getApp().globalData;
 
     var i = uni.getStorageSync('i');

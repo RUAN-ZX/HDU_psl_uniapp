@@ -105,7 +105,7 @@ var _default =
     Tid: "",
     Tname: "",
     url: "http://localhost:8080",
-    // url :"https://minipro.ryanalexander.cn",
+    picUrl: "https://stea.ryanalexander.cn/psl/",
     cap_info: {
       height: 0,
       top: 0,

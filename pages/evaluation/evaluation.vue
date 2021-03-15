@@ -1,10 +1,11 @@
 <template>
 	<view>
-		<view class="background" :style="{display:m_bg_hidden}">
+		<view class="background" style="display:none">
 		    <image 
 		        class="preface" 
-		        src="@/static/jpg/login/loading.gif"
+		        src="https://stea.ryanalexander.cn/psl/loading.gif"
 		        mode="widthFix"
+				crossorigin="anonymous"
 		    >
 		    </image>
 		</view>
@@ -31,7 +32,8 @@
 			<!-- <view class="animate__animated" hover-class="tada"> -->
 
 			<view 
-				:class="ani" 
+				:class="ani"
+				:style="{'animation-delay':index*0.1+'s'}"
 				v-if="ani_if"
 				v-for="(item,index) in arrayCE">
 				<evaluation :e="item" :c="item.Ec"></evaluation>
@@ -55,7 +57,7 @@
 		data() {
 			return {
 				ani_if: true,
-				ani: "animated fadeInUp",
+				ani: "",
 				animation: {},
 				animationData: {},
 				event: [{m:0},{m:5}], //0 1 2 || 3 4
@@ -85,6 +87,7 @@
 			loadingComplete: function(){
 				this.m_hidden="";
 				this.m_bg_hidden="none";
+				this.fadeInUp();
 			},
 			sort_(e){
 				// sorting the archievements
@@ -176,6 +179,8 @@
 		
 		onLoad: function () {
 			_this = this;
+			_this.loading();
+			
 			let access = uni.getStorageSync('a').toString();
 			_this.app = getApp().globalData;
 			_this.cap_info = _this.app.cap_info;
@@ -203,6 +208,7 @@
 			  },
 			  complete: () => {
 				 _this.loadingComplete(); 
+				 
 			  }
 			});
 			
@@ -219,6 +225,3 @@
 	} 
 </style>
 
-<style>
-	@import '@/common/animate.css';
-</style>
